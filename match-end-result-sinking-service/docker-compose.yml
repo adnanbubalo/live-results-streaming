@@ -1,0 +1,25 @@
+services:
+  db:
+    image: mysql
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: MatchResultsDb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 9000:8080
+
+volumes:
+  mysql-data:
