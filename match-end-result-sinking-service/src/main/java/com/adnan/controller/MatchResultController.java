@@ -15,7 +15,6 @@ import java.util.List;
 public class MatchResultController {
     private final MatchResultService matchResultService;
 
-    @Autowired
     public MatchResultController(MatchResultService matchResultService) {
         this.matchResultService = matchResultService;
     }

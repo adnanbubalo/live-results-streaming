@@ -12,27 +12,24 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Service
 public class MatchResultService {
     private final MatchResultRepository matchResultRepository;
     private final Map<String, MatchResultDTO> pendingEvents = new ConcurrentHashMap<>();
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-    @Autowired
     public MatchResultService(MatchResultRepository matchResultRepository) {
         this.matchResultRepository = matchResultRepository;
-        startEventInsertionThread();
     }
-    private void startEventInsertionThread() {
+    public void startEventInsertionThread() {
         executorService.submit(() -> {
             while (true) {
                 try {
                     for (Map.Entry<String, MatchResultDTO> entry : pendingEvents.entrySet()) {
                         MatchResultDTO event = entry.getValue();
                         MatchResult matchResult = new MatchResult();
-                        matchResult.setMatchId(event.matchId);
-                        matchResult.setMatchName(event.matchName);
-                        matchResult.setEndResult(event.endResult);
+                        matchResult.setMatchId(event.getMatchId());
+                        matchResult.setMatchName(event.getMatchName());
+                        matchResult.setEndResult(event.getEndResult());
                         matchResultRepository.save(matchResult);
 
                         pendingEvents.remove(entry.getKey());
@@ -49,7 +46,7 @@ public class MatchResultService {
         return matchResultRepository.findAll();
     }
     public void add(MatchResultDTO event) {
-        pendingEvents.put(event.matchId, event);
+        pendingEvents.put(event.getMatchId(), event);
     }
 
     public String getBestScoringHomeTeam() {

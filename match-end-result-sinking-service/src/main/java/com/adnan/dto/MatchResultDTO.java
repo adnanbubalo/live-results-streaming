@@ -1,15 +1,14 @@
 package com.adnan.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
+@Getter
 public class MatchResultDTO {
-    public String matchId;
-    public String matchName;
-    public String endResult;
-
-    MatchResultDTO(){}
-
-    public MatchResultDTO(String matchId, String matchName, String endResult) {
-        this.matchId = matchId;
-        this.matchName = matchName;
-        this.endResult = endResult;
-    }
+    private String matchId;
+    private String matchName;
+    private String endResult;
 }
