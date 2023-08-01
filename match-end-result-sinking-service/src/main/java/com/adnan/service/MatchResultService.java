@@ -1,5 +1,8 @@
-package com.adnan;
+package com.adnan.service;
 
+import com.adnan.dto.MatchResultDTO;
+import com.adnan.repository.MatchResultRepository;
+import com.adnan.model.MatchResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

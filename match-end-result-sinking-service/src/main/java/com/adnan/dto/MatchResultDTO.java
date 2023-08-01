@@ -1,4 +1,4 @@
-package com.adnan;
+package com.adnan.dto;
 
 public class MatchResultDTO {
     public String matchId;

@@ -1,4 +1,4 @@
-package com.adnan;
+package com.adnan.model;
 
 import jakarta.persistence.*;
 
@@ -14,8 +14,8 @@ public class MatchResult {
     @Column(length = 128)
     private String endResult;
 
-    MatchResult(){}
-    MatchResult(Integer id, String matchId, String matchName, String endResult) {
+    public MatchResult(){}
+    public MatchResult(Integer id, String matchId, String matchName, String endResult) {
         this.id = id;
         this.matchId = matchId;
         this.matchName = matchName;

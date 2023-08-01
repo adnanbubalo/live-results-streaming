@@ -1,5 +1,8 @@
-package com.adnan;
+package com.adnan.controller;
 
+import com.adnan.dto.MatchResultDTO;
+import com.adnan.service.MatchResultService;
+import com.adnan.model.MatchResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
