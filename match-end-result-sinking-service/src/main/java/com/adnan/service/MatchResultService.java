@@ -4,6 +4,8 @@ import com.adnan.dto.MatchResultDTO;
 import com.adnan.repository.MatchResultRepository;
 import com.adnan.model.MatchResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,9 +32,8 @@ public class MatchResultService {
                         matchResult.setMatchId(event.getMatchId());
                         matchResult.setMatchName(event.getMatchName());
                         matchResult.setEndResult(event.getEndResult());
-                        matchResultRepository.save(matchResult);
 
-                        pendingEvents.remove(entry.getKey());
+                        saveAndRemoveFromMap(matchResult, entry.getKey());
                     }
 
                     Thread.sleep(1000);
@@ -42,8 +43,18 @@ public class MatchResultService {
             }
         });
     }
-    public List<MatchResult> getAll() {
-        return matchResultRepository.findAll();
+    private void saveAndRemoveFromMap(MatchResult matchResult, String key) {
+        try {
+            matchResultRepository.save(matchResult);
+            pendingEvents.remove(key);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public List<MatchResult> getAll(Integer page, Integer size)
+    {
+        Page<MatchResult> matchResultPage = matchResultRepository.findAll(PageRequest.of(page, size));
+        return matchResultPage.getContent();
     }
     public void add(MatchResultDTO event) {
         pendingEvents.put(event.getMatchId(), event);
