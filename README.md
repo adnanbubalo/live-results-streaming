@@ -11,7 +11,7 @@ The generator now continously generates data every 1s that is being saved to the
 CTRL+C to end the generator.
 
 The service has the following API methods:
-- ```localhost:8080/api/results``` (GET) returns all match results
+- ```localhost:8080/api/results``` (GET) returns all match results (parameters: size, page)
 - ```localhost:8080/api/save-end-result``` (POST) saves a match result in the database
 - ```localhost:8080/api/best-scoring-home-team``` (GET) return a home team that scored the most number of goals along with the number of goals
 
